@@ -1,9 +1,7 @@
 apply plugin: 'android-sdk-manager'
 apply plugin: 'com.android.library'
 apply plugin: 'org.robolectric'
-apply plugin: 'maven'
-
-archivesBaseName = 'enroscar-async-rx'
+apply from: file("$rootDir/gradle/android-maven.gradle")
 
 android {
   compileSdkVersion project.androidCompileSdkVersion
@@ -14,12 +12,19 @@ android {
     targetSdkVersion project.androidTargetSdkVersion
     versionName project.version
   }
+
+  packagingOptions {
+    exclude 'LICENSE'
+    exclude 'NOTICE'
+    exclude 'asm-license.txt'
+  }
 }
 
 dependencies {
   compile 'io.reactivex:rxjava:1.0.11'
   compile project(':async')
   compile project(':async-rx-annotations')
+  androidTestCompile project.testDeps
 }
 
 // POM file modifications

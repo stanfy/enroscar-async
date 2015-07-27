@@ -1,9 +1,7 @@
 apply plugin: 'android-sdk-manager'
 apply plugin: 'com.android.library'
 apply plugin: 'org.robolectric'
-apply plugin: 'maven'
-
-archivesBaseName = 'enroscar-async'
+apply from: file("$rootDir/gradle/android-maven.gradle")
 
 android {
   compileSdkVersion project.androidCompileSdkVersion
@@ -14,18 +12,22 @@ android {
     targetSdkVersion project.androidTargetSdkVersion
     versionName project.version
   }
+
+  packagingOptions {
+    exclude 'LICENSE'
+    exclude 'NOTICE'
+    exclude 'asm-license.txt'
+  }
 }
 
 dependencies {
   compile project(':async-annotations')
   compile 'com.android.support:support-v4:22.2.0'
 
+  testCompile 'junit:junit:4.12'
   testCompile project.testDeps
   testCompile 'org.robolectric:robolectric:2.4'
   androidTestCompile project.testDeps
-  androidTestCompile 'com.jakewharton.espresso:espresso:1.1-r3', {
-    exclude group: 'org.hamcrest'
-  }
 }
 
 // POM file modifications

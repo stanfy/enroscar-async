@@ -25,6 +25,9 @@ script:
   # Android tests
   - ./gradlew conCheck
 
+after_success:
+  - gradle/deploy_snapshot.sh
+
 notifications:
   email: false
 
