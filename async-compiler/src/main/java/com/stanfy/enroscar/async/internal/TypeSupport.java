@@ -1,6 +1,7 @@
 package com.stanfy.enroscar.async.internal;
 
 import com.squareup.javawriter.JavaWriter;
+import com.stanfy.enroscar.async.Async;
 
 import java.util.Arrays;
 import java.util.Collections;
@@ -34,7 +35,6 @@ interface TypeSupport {
   String OPERATOR_BASE_CLASS = ASYNC_PACKAGE.concat(".internal.OperatorBase");
   String OPERATOR_CONTEXT_CLASS = OPERATOR_BASE_CLASS.concat(".OperatorContext");
   String ASYNC_PROVIDER_CLASS = ASYNC_PACKAGE.concat(".internal.AsyncProvider");
-  String ASYNC_CLASS = ASYNC_PACKAGE.concat(".Async");
   String OPERATOR_BUILDER_CLASS = ASYNC_PACKAGE.concat(".OperatorBuilder");
   String OPERATOR_BUILDER_BASE_CLASS = OPERATOR_BASE_CLASS.concat(".OperatorBuilderBase");
   String OBSERVER_BUILDER_CLASS = ASYNC_PACKAGE.concat(".internal.ObserverBuilder");
@@ -45,7 +45,7 @@ interface TypeSupport {
 
     @Override
     public Set<String> operatorImports() {
-      return Collections.singleton(ASYNC_CLASS);
+      return Collections.singleton(Async.class.getName());
     }
 
     @Override

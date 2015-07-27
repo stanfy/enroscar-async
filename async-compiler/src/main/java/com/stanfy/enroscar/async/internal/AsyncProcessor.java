@@ -1,5 +1,6 @@
 package com.stanfy.enroscar.async.internal;
 
+import com.stanfy.enroscar.async.Async;
 import com.stanfy.enroscar.async.Load;
 import com.stanfy.enroscar.async.Send;
 import com.stanfy.enroscar.async.rx.RxLoad;
@@ -82,7 +83,7 @@ public final class AsyncProcessor extends AbstractProcessor {
       String returnType = GenUtils.getReturnType(method);
 
       TypeSupport operatorTypeSupport = null;
-      if (returnType.startsWith(TypeSupport.ASYNC_CLASS.concat("<"))) {
+      if (returnType.startsWith(Async.class.getName().concat("<"))) {
         operatorTypeSupport = TypeSupport.ASYNC;
       } else if (returnType.startsWith(TypeSupport.RX_OBSERVABLE_CLASS.concat("<"))) {
         operatorTypeSupport = TypeSupport.RX;
