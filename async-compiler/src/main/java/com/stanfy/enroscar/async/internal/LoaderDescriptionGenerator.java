@@ -11,6 +11,8 @@ import javax.lang.model.element.ExecutableElement;
 import javax.lang.model.element.TypeElement;
 
 import static com.stanfy.enroscar.async.internal.GenUtils.operatorContext;
+import static com.stanfy.enroscar.async.internal.TypeSupport.LOADER_DESCRIPTION_CLASS;
+import static com.stanfy.enroscar.async.internal.TypeSupport.OPERATOR_CONTEXT_CLASS;
 import static javax.lang.model.element.Modifier.PUBLIC;
 
 /**
@@ -22,11 +24,8 @@ final class LoaderDescriptionGenerator extends BaseGenerator {
   public LoaderDescriptionGenerator(final ProcessingEnvironment env, final TypeElement type,
                                     final List<MethodData> methods) {
     super(env, type, methods, GenUtils.SUFFIX_LOADER_DESC);
-    setExtendsClass(LoaderDescription.class.getName() + "<" + getFqcn() + ">");
-    addImports(
-        LoaderDescription.class.getName(),
-        OperatorBase.OperatorContext.class.getName().replace('$', '.')
-    );
+    setExtendsClass(LOADER_DESCRIPTION_CLASS + "<" + getFqcn() + ">");
+    addImports(LOADER_DESCRIPTION_CLASS, OPERATOR_CONTEXT_CLASS);
 
     for (MethodData d : methods) {
       addImports(d.loaderDescriptionTypeSupport.loaderDescriptionImports());

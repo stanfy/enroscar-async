@@ -1,47 +1,41 @@
-buildscript {
-  repositories {
-    jcenter()
-  }
-
-  dependencies {
-    classpath 'org.gradle.api.plugins:gradle-nexus-plugin:0.7'
-  }
-}
-
 apply plugin: 'java'
 apply plugin: 'maven'
-apply plugin: 'nexus'
-
-version = '2.0-RC2-SNAPSHOT'
-group = 'com.stanfy.enroscar'
-
-archivesBaseName = "enroscar-${project.name}"
-
-repositories {
-  mavenCentral()
-  maven {
-    url "file://${System.env['ANDROID_HOME']}/extras/android/m2repository/"
-  }
-  maven {
-    url 'https://oss.sonatype.org/content/repositories/snapshots'
-  }
-}
+apply plugin: 'com.bmuschko.nexus'
 
 dependencies {
-  compile project(path: ':async', configuration: 'plain')
+  compile project(':async-annotations')
+  compile project(':async-rx-annotations')
   compile 'com.squareup:javawriter:2.5.0'
 
-  testCompile 'junit:junit:4.11'
-  testCompile 'org.easytesting:fest-assert-core:2.0M10'
-  testCompile 'com.google.testing.compile:compile-testing:0.5'
-  testCompile 'com.google.guava:guava:17.0'
-  testCompile 'org.truth0:truth:0.20'
+  testCompile 'junit:junit:4.12'
+  testCompile 'com.google.testing.compile:compile-testing:0.6'
+  testCompile 'com.google.guava:guava:18.0'
+  testCompile 'com.google.truth:truth:0.27'
 
-  testCompile group: 'org.robolectric', name: 'robolectric', version: '2.3'
   testRuntime files("${System.properties['java.home']}/../lib/tools.jar")
   testRuntime files("${System.env['ANDROID_HOME']}/platforms/android-19/android.jar")
-  testRuntime 'io.reactivex:rxjava:1.0.11'
-  testRuntime project(path: ':async-rx', configuration: 'plain')
+  testRuntime 'io.reactivex:rxjava:1.0.13'
+}
+
+// Get async module classes for tests.
+def runtimeProjecs = [':async', ':async-rx']
+runtimeProjecs.each {
+  evaluationDependsOn(it)
+  def classesTask = project(it).tasks.compileReleaseJava
+  def classesDir = classesTask.destinationDir
+  dependencies {
+    testCompile files(classesDir)
+  }
+  compileTestJava.dependsOn classesTask
+}
+
+// Add Android repos.
+def logger = new com.android.build.gradle.internal.LoggerWrapper(project.logger)
+def sdkHandler = new com.android.build.gradle.internal.SdkHandler(project, logger)
+for (File file : sdkHandler.sdkLoader.repositories) {
+  project.repositories.maven {
+    url = file.toURI()
+  }
 }
 
 tasks.withType(Test) {
@@ -49,41 +43,9 @@ tasks.withType(Test) {
   include "**/*Test.class"
 }
 
-def cleanupPom = { pom ->
-  pom.dependencies.removeAll { it.groupId == project.group }
-}
-
-install.repositories.mavenInstaller.pom.whenConfigured(cleanupPom)
-afterEvaluate {
-  uploadArchives.repositories.mavenDeployer.pom.whenConfigured(cleanupPom)
-}
-
 modifyPom {
   project {
     name 'Enroscar Async Compiler'
     description 'Processor for @Load/@Send annotations'
-    url 'https://github.com/stanfy/enroscar'
-    inceptionYear '2011'
-
-    scm {
-      url 'https://github.com/stanfy/enroscar'
-      connection 'scm:git:git@github.com:stanfy/enroscar.git'
-      developerConnection 'scm:git:git@github.com:stanfy/enroscar.git'
-    }
-
-    licenses {
-      license {
-        name 'The Apache Software License, Version 2.0'
-        url 'http://www.apache.org/licenses/LICENSE-2.0.txt'
-        distribution 'repo'
-      }
-    }
-
-    developers {
-      developer {
-        id 'stanfy'
-        name 'Stanfy Corp.'
-      }
-    }
   }
 }

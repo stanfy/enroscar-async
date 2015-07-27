@@ -10,7 +10,7 @@ import javax.tools.JavaFileObject;
 
 import static com.google.testing.compile.JavaSourceSubjectFactory.javaSource;
 import static com.stanfy.enroscar.async.internal.GenUtils.LOADER_ID_START;
-import static org.truth0.Truth.ASSERT;
+import static com.google.common.truth.Truth.assertAbout;
 
 /**
  * RxJava related tests.
@@ -114,7 +114,7 @@ public class RxTest {
         )
     );
 
-    ASSERT.about(javaSource())
+    assertAbout(javaSource())
         .that(file).processedWith(processor)
         .compilesWithoutError().and()
         .generatesSources(operatorSource, loaderDescriptionSource);
@@ -208,7 +208,7 @@ public class RxTest {
         )
     );
 
-    ASSERT.about(javaSource())
+    assertAbout(javaSource())
         .that(file).processedWith(processor)
         .compilesWithoutError().and()
         .generatesSources(operatorSource, loaderDescriptionSource);

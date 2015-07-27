@@ -1,7 +1,6 @@
 package com.stanfy.enroscar.async.internal;
 
 import com.squareup.javawriter.JavaWriter;
-import com.stanfy.enroscar.async.OperatorBuilder;
 
 import java.io.IOException;
 import java.util.EnumSet;
@@ -12,8 +11,7 @@ import javax.lang.model.element.ExecutableElement;
 import javax.lang.model.element.TypeElement;
 
 import static com.stanfy.enroscar.async.internal.GenUtils.*;
-import static com.stanfy.enroscar.async.internal.OperatorBase.OperatorBuilderBase;
-import static com.stanfy.enroscar.async.internal.OperatorBase.OperatorContext;
+import static com.stanfy.enroscar.async.internal.TypeSupport.*;
 import static javax.lang.model.element.Modifier.*;
 
 /**
@@ -26,9 +24,9 @@ final class OperatorGenerator extends BaseGenerator {
     super(env, type, methods, GenUtils.SUFFIX_OPERATOR);
 
     addImports(
-        AsyncProvider.class.getName(),
-        OperatorBase.class.getName(), OperatorContext.class.getName().replace('$', '.'),
-        OperatorBuilder.class.getName(), OperatorBuilderBase.class.getName().replace('$', '.')
+        ASYNC_PROVIDER_CLASS,
+        OPERATOR_BASE_CLASS, OPERATOR_CONTEXT_CLASS,
+        OPERATOR_BUILDER_CLASS, OPERATOR_BUILDER_BASE_CLASS
     );
 
     for (MethodData d : methods) {
@@ -36,7 +34,7 @@ final class OperatorGenerator extends BaseGenerator {
     }
 
     String operationsName = operationsClass.getQualifiedName().toString();
-    setExtendsClass(OperatorBase.class.getSimpleName() + "<" + operationsName + ","
+    setExtendsClass(simpleName(OPERATOR_BASE_CLASS) + "<" + operationsName + ","
         + " " + loaderDescription(packageName, operationsClass) + ">");
   }
 
@@ -69,11 +67,11 @@ final class OperatorGenerator extends BaseGenerator {
     w.emitStatement("super(new %s(context), context)", loaderDescription(packageName, operationsClass));
     w.endConstructor();
 
-    String buildClass = OperatorBuilder.class.getName()
+    String buildClass = OPERATOR_BUILDER_CLASS
         + "<" + getFqcn() + ", " + operationsClass.getQualifiedName() + ">";
     w.beginMethod(buildClass, "build", EnumSet.of(PUBLIC, STATIC));
     w.emitStatement(
-        "return new " + OperatorBuilderBase.class.getSimpleName()
+        "return new " + simpleName(OPERATOR_BUILDER_BASE_CLASS)
         + "<" + getFqcn() + ", " + operationsClass.getQualifiedName() + ">() {\n"
         + "  @Override\n"
         + "  protected " + getFqcn() + " create(final " + operatorContext(operationsClass) + " context) {\n"

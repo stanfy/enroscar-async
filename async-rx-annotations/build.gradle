@@ -1,0 +1,10 @@
+apply plugin: 'java'
+apply plugin: 'maven'
+apply plugin: 'com.bmuschko.nexus'
+
+modifyPom {
+  project {
+    name 'Enroscar Async Rx Annotations'
+    description 'Rx annotations for Enroscar Async'
+  }
+}

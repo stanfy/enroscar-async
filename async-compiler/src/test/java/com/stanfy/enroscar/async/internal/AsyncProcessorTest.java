@@ -5,21 +5,16 @@ import com.google.testing.compile.JavaFileObjects;
 
 import org.junit.Before;
 import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.robolectric.RobolectricTestRunner;
-import org.robolectric.annotation.Config;
 
 import javax.tools.JavaFileObject;
 
+import static com.google.common.truth.Truth.assertAbout;
 import static com.google.testing.compile.JavaSourceSubjectFactory.javaSource;
 import static com.stanfy.enroscar.async.internal.GenUtils.LOADER_ID_START;
-import static org.truth0.Truth.ASSERT;
 
 /**
  * Tests for AsyncProcessor.
  */
-@RunWith(RobolectricTestRunner.class)
-@Config(manifest = Config.NONE, emulateSdk = 18)
 public class AsyncProcessorTest {
 
   static {
@@ -47,7 +42,7 @@ public class AsyncProcessorTest {
         "  @Send int six() { }",
         "}"));
 
-    ASSERT.about(javaSource())
+    assertAbout(javaSource())
         .that(file).processedWith(processor)
         .failsToCompile()
 
@@ -68,7 +63,7 @@ public class AsyncProcessorTest {
         "  @Load Async<String> operation(int a1, String a2) { return new AsyncStub(); }",
         "}"));
 
-    ASSERT.about(javaSource())
+    assertAbout(javaSource())
         .that(file).processedWith(processor)
         .compilesWithoutError().and()
         .generatesSources(loadExpectedOperatorSource("Operations")).and()
@@ -87,7 +82,7 @@ public class AsyncProcessorTest {
         "  }",
         "}"));
 
-    ASSERT.about(javaSource())
+    assertAbout(javaSource())
         .that(file).processedWith(processor)
         .compilesWithoutError().and()
         .generatesSources(loadExpectedOperatorSource("Outer.Inner")); //.and() TODO
@@ -237,7 +232,7 @@ public class AsyncProcessorTest {
 //        )
 //    );
 
-    ASSERT.about(javaSource())
+    assertAbout(javaSource())
         .that(file).processedWith(processor)
         .compilesWithoutError(); // TODO .and()
         //.generatesSources(expected);

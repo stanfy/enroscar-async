@@ -1,7 +1,6 @@
 package com.stanfy.enroscar.async.internal;
 
 import com.squareup.javawriter.JavaWriter;
-import com.stanfy.enroscar.async.Async;
 
 import java.util.Arrays;
 import java.util.Collections;
@@ -29,24 +28,34 @@ interface TypeSupport {
 
   String listenerExample(String dataType);
 
+  String ASYNC_PACKAGE = "com.stanfy.enroscar.async";
 
-  String RX_OBSERVABLE = "rx.Observable";
+  String LOADER_DESCRIPTION_CLASS = ASYNC_PACKAGE.concat(".internal.LoaderDescription");
+  String OPERATOR_BASE_CLASS = ASYNC_PACKAGE.concat(".internal.OperatorBase");
+  String OPERATOR_CONTEXT_CLASS = OPERATOR_BASE_CLASS.concat(".OperatorContext");
+  String ASYNC_PROVIDER_CLASS = ASYNC_PACKAGE.concat(".internal.AsyncProvider");
+  String ASYNC_CLASS = ASYNC_PACKAGE.concat(".Async");
+  String OPERATOR_BUILDER_CLASS = ASYNC_PACKAGE.concat(".OperatorBuilder");
+  String OPERATOR_BUILDER_BASE_CLASS = OPERATOR_BASE_CLASS.concat(".OperatorBuilderBase");
+  String OBSERVER_BUILDER_CLASS = ASYNC_PACKAGE.concat(".internal.ObserverBuilder");
+
+  String RX_OBSERVABLE_CLASS = "rx.Observable";
 
   TypeSupport ASYNC = new TypeSupport() {
 
     @Override
     public Set<String> operatorImports() {
-      return Collections.singleton(Async.class.getName());
+      return Collections.singleton(ASYNC_CLASS);
     }
 
     @Override
     public Set<String> loaderDescriptionImports() {
-      return Collections.singleton(ObserverBuilder.class.getCanonicalName());
+      return Collections.singleton(OBSERVER_BUILDER_CLASS);
     }
 
     @Override
     public String asyncProvider(final JavaWriter w, final ExecutableElement method) {
-      String type = w.compressType(AsyncProvider.class.getName() + "<" + getDataType(method) + ">");
+      String type = w.compressType(ASYNC_PROVIDER_CLASS + "<" + getDataType(method) + ">");
       return type + " provider = new " + type + "() {\n"
           + "  @Override\n"
           + "  public " + w.compressType(getReturnType(method)) + " provideAsync() {\n"
@@ -59,7 +68,7 @@ interface TypeSupport {
     public String loaderDescriptionReturnType(JavaWriter w, ExecutableElement method,
                                               BaseGenerator generator) {
       String dataType = getDataType(method).toString();
-      return w.compressType(ObserverBuilder.class.getName()
+      return w.compressType(OBSERVER_BUILDER_CLASS
           + "<" + dataType + "," +
           loaderDescription(generator.packageName, generator.operationsClass) + ">");
     }
@@ -91,7 +100,7 @@ interface TypeSupport {
     @Override
     public Set<String> operatorImports() {
       return new HashSet<>(Arrays.asList(
-          RX_OBSERVABLE,
+          RX_OBSERVABLE_CLASS,
           getClass().getPackage().getName() + "." + PROVIDER
       ));
     }
@@ -99,7 +108,7 @@ interface TypeSupport {
     @Override
     public Set<String> loaderDescriptionImports() {
       return new HashSet<>(Arrays.asList(
-          RX_OBSERVABLE,
+          RX_OBSERVABLE_CLASS,
           getClass().getPackage().getName() + "." + TOOLS
       ));
     }
@@ -118,7 +127,7 @@ interface TypeSupport {
     @Override
     public String loaderDescriptionReturnType(JavaWriter w, ExecutableElement method,
                                               BaseGenerator generator) {
-      return w.compressType(RX_OBSERVABLE + "<" + getDataType(method) + ">");
+      return w.compressType(RX_OBSERVABLE_CLASS + "<" + getDataType(method) + ">");
     }
 
     @Override

@@ -7,9 +7,8 @@ import static java.lang.annotation.ElementType.METHOD;
 import static java.lang.annotation.RetentionPolicy.SOURCE;
 
 /**
- * Same as {@link com.stanfy.enroscar.async.Send} but ensures that operator deals with
- * {@link rx.Observable} even if an annotated method return type is
- * {@link com.stanfy.enroscar.async.Async}.
+ * Same as {@code @Send} but ensures that operator deals with
+ * {@code rx.Observable} even if an annotated method return type is {@code Async}.
  * @author Roman Mazur - Stanfy (http://stanfy.com)
  */
 @Retention(SOURCE)

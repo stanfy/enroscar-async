@@ -2,6 +2,7 @@ package com.stanfy.enroscar.async.internal;
 
 import com.squareup.javawriter.JavaWriter;
 import com.stanfy.enroscar.async.Load;
+import com.stanfy.enroscar.async.rx.RxLoad;
 
 import java.io.IOException;
 import java.io.StringWriter;
@@ -16,8 +17,6 @@ import javax.lang.model.element.VariableElement;
 import javax.lang.model.type.DeclaredType;
 import javax.lang.model.type.ExecutableType;
 import javax.lang.model.type.TypeMirror;
-
-import static com.stanfy.enroscar.async.internal.OperatorBase.OperatorContext;
 
 /**
  * Tools.
@@ -72,7 +71,7 @@ final class GenUtils {
   }
 
   public static String operatorContext(final TypeElement operationsClass) {
-    return OperatorContext.class.getSimpleName() + "<" + operationsClass.getQualifiedName() + ">";
+    return simpleName(TypeSupport.OPERATOR_CONTEXT_CLASS) + "<" + operationsClass.getQualifiedName() + ">";
   }
 
   static String getReturnType(final ExecutableElement method) {
@@ -98,7 +97,7 @@ final class GenUtils {
 
   static boolean isLoadMethod(ExecutableElement method) {
     return method.getAnnotation(Load.class) != null
-        || (Rx.hasRx() && method.getAnnotation(Rx.rxLoad()) != null);
+        || method.getAnnotation(RxLoad.class) != null;
   }
 
   public static String capitalize(final String s) {
@@ -131,7 +130,7 @@ final class GenUtils {
   }
 
   public static List<String> parameters(final JavaWriter w, final ExecutableElement method) {
-    ArrayList<String> res = new ArrayList<String>(method.getParameters().size());
+    ArrayList<String> res = new ArrayList<>(method.getParameters().size());
     for (VariableElement arg : method.getParameters()) {
       TypeMirror type = arg.asType();
       res.add("final " + w.compressType(type.toString()));
@@ -139,4 +138,16 @@ final class GenUtils {
     }
     return res;
   }
+
+  public static String simpleName(final String fqn) {
+    int dotIndex = fqn.lastIndexOf(".");
+    if (dotIndex == -1) {
+      return fqn;
+    }
+    if (dotIndex == fqn.length() - 1) {
+      throw new IllegalArgumentException("Bad class name (trailing dot) [" + fqn + "]");
+    }
+    return fqn.substring(dotIndex + 1);
+  }
+
 }

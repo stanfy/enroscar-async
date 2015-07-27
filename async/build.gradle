@@ -3,7 +3,7 @@ apply plugin: 'com.android.library'
 apply plugin: 'org.robolectric'
 apply plugin: 'maven'
 
-archivesBaseName = 'enroscar-async-rx'
+archivesBaseName = 'enroscar-async'
 
 android {
   compileSdkVersion project.androidCompileSdkVersion
@@ -17,9 +17,15 @@ android {
 }
 
 dependencies {
-  compile 'io.reactivex:rxjava:1.0.11'
-  compile project(':async')
-  compile project(':async-rx-annotations')
+  compile project(':async-annotations')
+  compile 'com.android.support:support-v4:22.2.0'
+
+  testCompile project.testDeps
+  testCompile 'org.robolectric:robolectric:2.4'
+  androidTestCompile project.testDeps
+  androidTestCompile 'com.jakewharton.espresso:espresso:1.1-r3', {
+    exclude group: 'org.hamcrest'
+  }
 }
 
 // POM file modifications
@@ -27,8 +33,8 @@ uploadArchives {
   repositories {
     mavenDeployer {
       pom.project {
-        name 'Enroscar Async Rx'
-        description 'Rx extension for Enroscar Async'
+        name 'Enroscar Async'
+        description 'Library for managing asynchronous operations via Android loaders with a nice API'
       }
     }
   }
