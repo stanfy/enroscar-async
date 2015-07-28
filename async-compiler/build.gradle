@@ -3,7 +3,7 @@ apply plugin: 'maven'
 apply plugin: 'com.bmuschko.nexus'
 
 dependencies {
-  compile project(':async-annotations')
+  compile project(':async-interface')
   compile project(':async-rx-annotations')
   compile 'com.squareup:javawriter:2.5.0'
 

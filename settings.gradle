@@ -1,6 +1,6 @@
 rootProject.name = 'enroscar-async'
 
-include ':async-annotations'
+include ':async-interface'
 include ':async'
 include ':async-compiler'
 include ':async-rx-annotations'

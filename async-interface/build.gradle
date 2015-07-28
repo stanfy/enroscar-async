@@ -4,7 +4,7 @@ apply plugin: 'com.bmuschko.nexus'
 
 modifyPom {
   project {
-    name 'Enroscar Async Annotations'
-    description 'Annotations for Enroscar Async'
+    name 'Enroscar Async Interface'
+    description 'Main interface for Enroscar Async'
   }
 }
