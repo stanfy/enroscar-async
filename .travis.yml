@@ -2,10 +2,10 @@ language: android
 
 android:
   components:
-    - build-tools-22.0.1
-    - android-22
-    - extra-android-m2repository
-    - sys-img-armeabi-android-10
+  - build-tools-22.0.1
+  - android-22
+  - extra-android-m2repository
+  - sys-img-armeabi-android-10
 
 jdk:
   - oraclejdk8
@@ -20,9 +20,7 @@ before_script:
   - adb shell input keyevent 82
 
 script:
-  # JavaVM tests
   - ./gradlew --continue check
-  # Android tests
   - ./gradlew conCheck
 
 after_success:
@@ -35,4 +33,9 @@ sudo: false
 
 cache:
   directories:
-    - $HOME/.gradle
+  - "$HOME/.gradle"
+
+env:
+  global:
+  - secure: BiFnIWJR8vNJHRmCcBqS/i4YqcYmTKLWg5+0RFda0j3Ud+JUNqx0FMc+X/Pt4t10JqBwEhAZJ0asirInytfKm7ohzEjKYhO75CEzP262cDDTZCN6zJBmViYkGS8zyktxDWeDzi+pdPqlcXIbY67bSSt7RrrC1lmun7bOox0Gjcna8lSwBYpEFDYYmfp0hd4qaBtK3+4bYbbxGbVvcSswlIe/3a2pj0Me3QTwtzQy9JLPB8dH2S/CSz1NZU524Pzyhjr3yd5oOTFnVgfcoB8p8RaqlbyxukCiFWJdcUH9Qgjzd/Bq0VbiRA5F+0MnhsWy05k3JaxS6CZKCbEXnQ8Y18QgIcWMXStD7CXZvKV6/rhsD2gPSKELPrd6GXDyrap9dFjZ28YsPtSHQVjwjFdaTjcIJ5RyWyEy9GcJB1oVc7kngS/vW6/ChioRzVbr1tH/Q2sHFviD7mfAvlp4rNkG/kccgaPEuyryqB8VcFZ085X1O0LBbkE5TOFPS48F1uHsv5yNd4zwPasFVOzYmepPqWrMwg+DLk14E0/lfPm3sUIddZikCfn5xnQDdndWhWNDYK9CXfYhqQsz6fSOntLn2HfRUB7577T1F9p9kT1STjS1fvrIroqqqs8Fs8IGzqXbVTDIy0/MrEvQhVqN066dI2DaCYZJuvWW/uEtatmv06Q=
+  - secure: cZwcDEGQQfl8GqA3zQTmukaB1QmjDfL+LzJxGG2+GnE9o2IosT0XBIs8dwcDutHxxwUF4Fka/ypipGNwtYlpzkTXcYNc6L8N6nHQE8VlQ0mQek/t1lRrNjdZ+qHxPg1N/l9ctx7aa7D5kA7iPlDCmx+XIpT+NvEF3UfThrMqywyhD/6o9+sSx0nnE5TeK1SVbt7r9bI+hDFNEjaqik/33kAGlXa+tycXwWvQm8W043hkCerygt2B8SgRbe5CYgXkcXKu8O7TA87OLAiKv5UeJzTlyoUstSSJrN4UNtOm+BSIVeYhk6rr32a+EuTTt68AyVxO26dMIv7z/KmSQ6XzFFGaLbEXHC+wlqzSVlpzK8iR7jOPguvkDsxhXr4+ns86z7WgXNQVJSGl1ffbdiXzfaKFAw/dw18vpK9JNRJQkeHq4bJnM3VnSc128lHP5W7OHPrwv/hNaLPUCAwIU6fWsw5Hck8R11r/k1qID7ba17bhfCf39LSPuhJLHIPj6sffsy9ogXZR9TEunQR3sEz1r/o6d+xUYELRgqFApoHT3eSLmHh0AqGVziOSvSrVq9l6ACvXhVHASFBFc08+KYWaUPNff1H2kU2ndHiybL+X8pg+3AoJdIaNdMEyCeUy68wobLJjHTRYDjO1x+gcOTu3NowYOJCR9PXmFQlo6FSP5dw=
