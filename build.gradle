@@ -50,7 +50,7 @@ ext {
 
 subprojects {
   group = "com.stanfy.enroscar"
-  version = '2.0-RC2-SNAPSHOT'
+  version = '2.0-RC2'
   repositories {
     mavenCentral()
     mavenLocal()
