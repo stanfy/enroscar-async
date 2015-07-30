@@ -50,7 +50,7 @@ ext {
 
 subprojects {
   group = "com.stanfy.enroscar"
-  version = '2.0-RC2'
+  version = '2.0-SNAPSHOT'
   repositories {
     mavenCentral()
     mavenLocal()
@@ -66,31 +66,3 @@ subprojects {
     }
   }
 }
-
-/*
-/Users/roman/dev/workspace/enroscar/async/build/intermediates/classes/androidTest/debug
-/Users/roman/dev/workspace/enroscar/async/build/intermediates/pre-dexed/androidTest/debug/enroscar-async-annotations-2.0-RC2-SNAPSHOT-41c5c802be810e1fba8e97ba674e86089542a47c.jar
-/Users/roman/dev/workspace/enroscar/async/build/intermediates/pre-dexed/androidTest/debug/classes-0a6a730cef24dbf7dc14e8d893033f385f0499f5.jar
-/Users/roman/dev/workspace/enroscar/async/build/intermediates/pre-dexed/androidTest/debug/javax.inject-1-b4268435bf0593e97dbf336ddffbf051bdfb2c4b.jar
-/Users/roman/dev/workspace/enroscar/async/build/intermediates/pre-dexed/androidTest/debug/classes-a7c4d0aa9e0b796a98b4b30127202a53541c1ef1.jar
-/Users/roman/dev/workspace/enroscar/async/build/intermediates/pre-dexed/androidTest/debug/support-annotations-22.2.1-c361c6ffc255cefb0c99d509ecaaddb142834f63.jar
-/Users/roman/dev/workspace/enroscar/async/build/intermediates/pre-dexed/androidTest/debug/hamcrest-integration-1.3-0e2dbe301693571076896b29583ded75f11141fc.jar
-/Users/roman/dev/workspace/enroscar/async/build/intermediates/pre-dexed/androidTest/debug/classes-152e999da3b674dc94afc18473b213b062141d9b.jar
-/Users/roman/dev/workspace/enroscar/async/build/intermediates/pre-dexed/androidTest/debug/javawriter-2.1.1-20276abd9642fe148e6b46be93f88a5301e80ba2.jar
-/Users/roman/dev/workspace/enroscar/async/build/intermediates/pre-dexed/androidTest/debug/classes-0b035b0d7b69ce569bbaf1ae8428411618b90a17.jar
-/Users/roman/dev/workspace/enroscar/async/build/intermediates/pre-dexed/androidTest/debug/classes-f07f41fd6f447ee9b45f378b9cc3b1573c81b3d7.jar
-/Users/roman/dev/workspace/enroscar/async/build/intermediates/pre-dexed/androidTest/debug/hamcrest-core-1.3-a655e0449b826b3634b6cde9a0131ad154f6f849.jar
-/Users/roman/dev/workspace/enroscar/async/build/intermediates/pre-dexed/androidTest/debug/jsr305-2.0.1-274db28dca31db2ea7ac4c308c102713f91c507f.jar
-/Users/roman/dev/workspace/enroscar/async/build/intermediates/pre-dexed/androidTest/debug/javax.annotation-api-1.2-a71580f0b1c17fe1fa05e10abea20dd63792fe4d.jar
-/Users/roman/dev/workspace/enroscar/async/build/intermediates/pre-dexed/androidTest/debug/hamcrest-library-1.3-f90742329a2b5e5486559883bd0fe17fa98e9529.jar
-/Users/roman/dev/workspace/enroscar/async/build/intermediates/pre-dexed/androidTest/debug/accessibility-test-framework-2.0-de196c5c054f033533921f77c9b3ae3cc62a26cd.jar
-/Users/roman/dev/workspace/enroscar/async/build/intermediates/pre-dexed/androidTest/debug/classes-d7a8736a4ecce6e34a3585132f4d5175f377a251.jar
-/Users/roman/dev/workspace/enroscar/async/build/intermediates/pre-dexed/androidTest/debug/internal_impl-22.2.0-52cac937b884c39b4ebd189a1d536dfd0ec9416c.jar
-/Users/roman/dev/workspace/enroscar/async/build/intermediates/pre-dexed/androidTest/debug/junit-4.12-97ed885cd0b90a092075d5b09cff58027ce1f4c4.jar
-/Users/roman/dev/workspace/enroscar/async/build/intermediates/pre-dexed/androidTest/debug/classes-40a1d12f37b4e8cb9f797f40dfaad1914df308d2.jar
-/Users/roman/dev/workspace/enroscar/async/build/intermediates/pre-dexed/androidTest/debug/assertj-android-1.0.1-ce29f21033f50b1a378cd3ca61ba3eb9220c91b9.jar
-/Users/roman/dev/workspace/enroscar/async/build/intermediates/pre-dexed/androidTest/debug/assertj-core-1.7.1-48cfb09ebfbaf8b6e7dcc6215e88728e32c71e7e.jar
-/Users/roman/dev/workspace/enroscar/async/build/intermediates/pre-dexed/androidTest/debug/classes-b822368fcac0ff203cbc43b46bf966f6cf17a636.jar
-/Users/roman/dev/workspace/enroscar/async/build/intermediates/pre-dexed/androidTest/debug/mockito-all-1.10.19-6ab980bfb35e5cc7dd6bcb508f712b4623b42670.jar
-/Users/roman/dev/workspace/enroscar/async/build/intermediates/pre-dexed/androidTest/debug/classes-3d53b678ceb0e8f290773e5ac8d3928497da409d.jar
- */
