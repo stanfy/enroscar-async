@@ -34,6 +34,8 @@ uploadArchives {
       pom.project {
         name 'Enroscar Async Rx'
         description 'Rx extension for Enroscar Async'
+        commonPomPart.delegate = delegate
+        commonPomPart()
       }
     }
   }

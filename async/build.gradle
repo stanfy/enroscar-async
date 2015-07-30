@@ -37,6 +37,8 @@ uploadArchives {
       pom.project {
         name 'Enroscar Async'
         description 'Library for managing asynchronous operations via Android loaders with a nice API'
+        commonPomPart.delegate = delegate
+        commonPomPart()
       }
     }
   }
