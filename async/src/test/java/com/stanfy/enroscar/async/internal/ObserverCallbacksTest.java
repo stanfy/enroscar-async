@@ -1,17 +1,19 @@
 package com.stanfy.enroscar.async.internal;
 
+import com.stanfy.enroscar.async.BuildConfig;
+
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.robolectric.RobolectricTestRunner;
+import org.robolectric.RobolectricGradleTestRunner;
 import org.robolectric.annotation.Config;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.fail;
 import static org.mockito.Mockito.mock;
 
-@RunWith(RobolectricTestRunner.class)
-@Config(emulateSdk = android.os.Build.VERSION_CODES.JELLY_BEAN_MR2)
+@RunWith(RobolectricGradleTestRunner.class)
+@Config(constants = BuildConfig.class, sdk = android.os.Build.VERSION_CODES.JELLY_BEAN_MR2)
 public class ObserverCallbacksTest {
 
   private ObserverCallbacks<Thing> callbacks;

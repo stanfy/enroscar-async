@@ -1,6 +1,5 @@
 apply plugin: 'android-sdk-manager'
 apply plugin: 'com.android.library'
-apply plugin: 'org.robolectric'
 apply from: file("$rootDir/gradle/android-maven.gradle")
 
 android {
@@ -26,7 +25,7 @@ dependencies {
 
   testCompile 'junit:junit:4.12'
   testCompile project.testDeps
-  testCompile 'org.robolectric:robolectric:2.4'
+  testCompile 'org.robolectric:robolectric:3.0'
   androidTestCompile project.testDeps
 }
 

@@ -8,12 +8,13 @@ import android.net.Uri;
 
 import com.stanfy.enroscar.async.Async;
 import com.stanfy.enroscar.async.AsyncObserver;
+import com.stanfy.enroscar.async.BuildConfig;
 import com.stanfy.enroscar.async.Releaser;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.robolectric.Robolectric;
-import org.robolectric.RobolectricTestRunner;
+import org.robolectric.RobolectricGradleTestRunner;
 import org.robolectric.annotation.Config;
 import org.robolectric.shadows.ShadowContentResolver;
 
@@ -21,14 +22,14 @@ import static com.stanfy.enroscar.async.Tools.asyncCursor;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
-import static org.robolectric.Robolectric.application;
-import static org.robolectric.Robolectric.shadowOf;
+import static org.robolectric.RuntimeEnvironment.application;
+import static org.robolectric.Shadows.shadowOf;
 
 /**
  * Tests for CursorAsync.
  */
-@RunWith(RobolectricTestRunner.class)
-@Config(emulateSdk = android.os.Build.VERSION_CODES.JELLY_BEAN_MR2)
+@RunWith(RobolectricGradleTestRunner.class)
+@Config(constants = BuildConfig.class, sdk = android.os.Build.VERSION_CODES.JELLY_BEAN_MR2)
 public class CursorAsyncTest {
 
   private final Uri uri = Uri.parse("content://test/uri");
@@ -137,7 +138,7 @@ public class CursorAsyncTest {
       }
     });
 
-    Robolectric.runBackgroundTasks();
+    Robolectric.flushBackgroundThreadScheduler();
 
     assertThat(params)
         .containsExactly(uri, new String[] {"p"}, "where", new String[] {"arg"}, "asc");

@@ -14,14 +14,14 @@ dependencies {
 
   testRuntime files("${System.properties['java.home']}/../lib/tools.jar")
   testRuntime files("${System.env['ANDROID_HOME']}/platforms/android-19/android.jar")
-  testRuntime 'io.reactivex:rxjava:1.0.13'
+  testRuntime 'io.reactivex:rxjava:1.0.14'
 }
 
 // Get async module classes for tests.
 def runtimeProjecs = [':async', ':async-rx']
 runtimeProjecs.each {
   evaluationDependsOn(it)
-  def classesTask = project(it).tasks.compileReleaseJava
+  def classesTask = project(it).tasks.compileReleaseJavaWithJavac
   def classesDir = classesTask.destinationDir
   dependencies {
     testCompile files(classesDir)

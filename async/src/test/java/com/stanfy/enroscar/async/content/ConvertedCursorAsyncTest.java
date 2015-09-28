@@ -8,12 +8,13 @@ import android.net.Uri;
 
 import com.stanfy.enroscar.async.Async;
 import com.stanfy.enroscar.async.AsyncObserver;
+import com.stanfy.enroscar.async.BuildConfig;
 
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.robolectric.Robolectric;
-import org.robolectric.RobolectricTestRunner;
+import org.robolectric.RobolectricGradleTestRunner;
 import org.robolectric.annotation.Config;
 import org.robolectric.shadows.ShadowContentResolver;
 
@@ -22,14 +23,14 @@ import java.util.List;
 import static com.stanfy.enroscar.async.Tools.asyncCursor;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.mock;
-import static org.robolectric.Robolectric.application;
-import static org.robolectric.Robolectric.shadowOf;
+import static org.robolectric.RuntimeEnvironment.application;
+import static org.robolectric.Shadows.shadowOf;
 
 /**
  * Tests for CursorAsync.
  */
-@RunWith(RobolectricTestRunner.class)
-@Config(emulateSdk = android.os.Build.VERSION_CODES.JELLY_BEAN_MR2)
+@RunWith(RobolectricGradleTestRunner.class)
+@Config(constants = BuildConfig.class, sdk = android.os.Build.VERSION_CODES.JELLY_BEAN_MR2)
 public class ConvertedCursorAsyncTest {
 
   private final Uri uri = Uri.parse("content://test/uri");
@@ -135,7 +136,7 @@ public class ConvertedCursorAsyncTest {
       }
     });
 
-    Robolectric.runBackgroundTasks();
+    Robolectric.flushBackgroundThreadScheduler();
 
     assertThat(result).containsExactly("ok");
   }
@@ -170,7 +171,7 @@ public class ConvertedCursorAsyncTest {
       }
     });
 
-    Robolectric.runBackgroundTasks();
+    Robolectric.flushBackgroundThreadScheduler();
 
     assertThat(result).containsExactly("f");
     assertThat(testData.getPosition()).isZero();
@@ -208,7 +209,7 @@ public class ConvertedCursorAsyncTest {
       }
     });
 
-    Robolectric.runBackgroundTasks();
+    Robolectric.flushBackgroundThreadScheduler();
 
     assertThat(result[0]).containsExactly("first", "second");
   }

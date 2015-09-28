@@ -2,13 +2,14 @@ package com.stanfy.enroscar.async.internal;
 
 import com.stanfy.enroscar.async.Async;
 import com.stanfy.enroscar.async.AsyncObserver;
+import com.stanfy.enroscar.async.BuildConfig;
 import com.stanfy.enroscar.async.internal.WrapAsyncLoader.Result;
 
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.robolectric.Robolectric;
-import org.robolectric.RobolectricTestRunner;
+import org.robolectric.RobolectricGradleTestRunner;
+import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Config;
 
 import static android.support.v4.content.Loader.OnLoadCompleteListener;
@@ -19,8 +20,8 @@ import static org.mockito.Mockito.verify;
 /**
  * Tests for {@link com.stanfy.enroscar.async.internal.WrapAsyncLoader}
  */
-@RunWith(RobolectricTestRunner.class)
-@Config(emulateSdk = android.os.Build.VERSION_CODES.JELLY_BEAN_MR2)
+@RunWith(RobolectricGradleTestRunner.class)
+@Config(constants = BuildConfig.class, sdk = android.os.Build.VERSION_CODES.JELLY_BEAN_MR2)
 public class WrapAsyncLoaderTest {
 
   /** Loader instance. */
@@ -62,7 +63,7 @@ public class WrapAsyncLoaderTest {
     replicateInvoked = false;
     releasedData = null;
 
-    AsyncContext<String> context = new AsyncContext<String>(Robolectric.application, mockAsync) {
+    AsyncContext<String> context = new AsyncContext<String>(RuntimeEnvironment.application, mockAsync) {
       @Override
       public void releaseData(final String data) {
         if (data == null) {

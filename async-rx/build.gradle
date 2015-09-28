@@ -1,6 +1,5 @@
 apply plugin: 'android-sdk-manager'
 apply plugin: 'com.android.library'
-apply plugin: 'org.robolectric'
 apply from: file("$rootDir/gradle/android-maven.gradle")
 
 android {
