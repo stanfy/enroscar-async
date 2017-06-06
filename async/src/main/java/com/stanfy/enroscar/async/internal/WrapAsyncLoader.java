@@ -116,16 +116,12 @@ final class WrapAsyncLoader<D> extends Loader<WrapAsyncLoader.Result<D>> {
   }
 
   private void post(final Result<D> result) {
-    if (Looper.getMainLooper() == Looper.myLooper()) {
-      deliverResult(result);
-    } else {
-      MAIN_THREAD_HANDLER.post(new Runnable() {
-        @Override
-        public void run() {
-          deliverResult(result);
-        }
-      });
-    }
+    MAIN_THREAD_HANDLER.post(new Runnable() {
+      @Override
+      public void run() {
+        deliverResult(result);
+      }
+    });
   }
 
   /** Execution result. */
